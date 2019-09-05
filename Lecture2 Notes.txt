@@ -1,0 +1,92 @@
+9/5/2019
+
+From last lecture:
+Types in C are weird
+Memory oriented language
+type:
+  length:#bytes
+  format: how to interpret the bytes
+
+No...
+  string
+  boolean
+
+0 = false
+non-0 = true
+
+char is 1 byte long
+short <= int <= long
+sizes are relative
+
+GENERALLY
+short = 2 bytes
+int = 4 bytes
+long = 8 bytes
+check to make sure!!
+
+printf("%d\n", sizeof(int));
+printf("%d\n", sizeof(long));
+printf("%d\n", sizeof(short));
+
+sizeoof(<type>); <-- gives you the size of the type. 
+^^^ can do this with arrays too.
+
+comment making is the same as java
+
+int array[] = {1,2,3}; <-- works
+int array[2] = {1,2,3}; <-- depends. Might crash your program. Just be careful,
+	that part might get lost in memory
+
+segmentation fault: attemp to access memory outside of allowed memory (different from reserved memory).
+page = a mount of memory; a memory size
+
+maximum amount of dimensions in an multidimensional array: 5
+
+i++ <-- post increment. Returns value first, then increments it
+++i <-- pre increment. Increments value first, then returns that new value.
+
+'\0' <-- this is the null terminator. This terminates a string.
+
+the string "hello" would be represented as follows:
+{'h', 'e', 'l', 'l', 'o', '\0'}
+
+%s <-- this is the "escape code" thingy for strings
+
+How to make structures (similar to objects)
+struct <name>{
+  |<type> <name>|;
+  |<type> <name>|;
+  |<type> <name>|;
+  ...
+}
+
+How to declare structures
+struc <structName> <instancename> = {<field1>, <field2>}
+
+How to access a field:
+<structname>.<fieldname>; <-- notice no need for parentheses
+
+Can make a struc of strucs
+
+struc point {
+  int x;
+  int y;
+}
+
+struc line {
+  struc point corner0;
+  struc point corner1;
+}
+
+struc line thingy = {{1,2}, {3,4}};
+
+^^^order is top to bottom left to right
+
+thingy.corner0.x <-- will access one. Can both read and write this.
+
+
+
+
+
+
+

@@ -41,6 +41,9 @@ terminal commands
 ls <-- list of all files
 ls test* <-- looks for any programs that start with test and end with anything
 ls test.c <-- searches for this file
+mv <file> <folder> <-- moves this file to that folder
+mkdir <directory name> <--makes a directory
+
 
 blue text is generally all directories
 
