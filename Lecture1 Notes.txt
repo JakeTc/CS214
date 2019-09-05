@@ -1,0 +1,78 @@
+ssh jt919@less.cs.rutgers.edu <--- gets you onto ilab machine
+Need ssh client --> putty or secure shell client
+
+X2GO <-- dont use this, slow unreliable, login limit
+
+two major text editors: emacs or vi
+
+Question Asking
+0. What do you think the problem is?
+1. What have you done so far?
+
+Why C?
+
+C: compile(source)...
+	compile ... link ... assenble ---> executable
+	source --> executable
+
+Java: javac(source)...
+	compile ... <magic> ---> bytecode
+	java bytecodeName <--- this is how you run the code on a terminal
+	source --> bytecode
+	bytecode --> commands
+
+compiler for C
+gcc <sourcecodename.c>
+to run, use command ./a.out
+
+"." <-- use dot command to refer to "this" code
+
+gcc test.c -o test <--- compiles and creates executable
+./test <---runs the file
+
+Care and use of your C. code
+0. Always return something!!!!
+1. Always initialize everything(!!) (ex. set ints to 0 and strings to 'a')
+
+There are no methods in C, only programs and functions
+
+
+terminal commands
+ls <-- list of all files
+ls test* <-- looks for any programs that start with test and end with anything
+ls test.c <-- searches for this file
+
+blue text is generally all directories
+
+cd tmp <-- goes into tmp directory
+using ls command in a directory searches the directory
+
+cd .. <-- goes back one directory chain
+pwd <-- "print working directory", will tell you where you are right now. Will show you the file from root
+cd ~ <-- takes you to home directory
+
+rm <filename> <-- removes file name. BE CAREFUL!!!
+
+quick key, press the first few letters and hit tab twice. mess around with tab
+
+
+int
+char
+String(kinda no)
+float
+double
+short
+long
+boolean(nope) <-- value 0 = false, every other value is true
+	(can use enum to get boolean values)
+
+C is a memory oriented language. 
+
+Act of assinging a value itself has a return value!!!!
+int a = 3; <-- this returns the value 3
+
+char a = 'a';
+a = 52; <-- return value of this statement is 1 because 
+
+
+
