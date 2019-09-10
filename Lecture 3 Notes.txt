@@ -1,0 +1,30 @@
+
+unions vs strucs
+strucs makes memory for each and every field
+union only gets one chunk of memory and formats it based on how you call the union
+
+ex. if union has int a and char b <--4 bytes total b/c int is the biggest of the two
+calling union.b takes one byte out of the 4 and interprets it as a char
+
+you should define a union only using the largest data type that you are using
+
+Do more research about this!!!
+
+&<variable name> <--- gets the memory location of this
+
+* == "go to the memory address of..."
+& == "get the memory address of..."
+
+when declaring a pointer, be sure to include a "*" with the type"
+  int* b = ...
+
+*b <--- dereference operator
+
+int b;
+int* a = b;
+(*a) + 1 goes to the memory location of a and returns that value + 1
+*(a + 1) goes to the memory location at a, moves forward 1*4 (4 being the space of the int type) and return that value
+
+pointers are very similar to arrays.
+a[i] == *(a + i(type)) where 
+char** <-- 2d array

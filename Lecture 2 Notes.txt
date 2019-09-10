@@ -58,7 +58,7 @@ struct <name>{
   |<type> <name>|;
   |<type> <name>|;
   ...
-}
+};     <---DONT FORGET THE SEMICOLON!!!
 
 How to declare structures
 struc <structName> <instancename> = {<field1>, <field2>}
@@ -71,12 +71,12 @@ Can make a struc of strucs
 struc point {
   int x;
   int y;
-}
+};
 
 struc line {
   struc point corner0;
   struc point corner1;
-}
+};
 
 struc line thingy = {{1,2}, {3,4}};
 
