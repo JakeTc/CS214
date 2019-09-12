@@ -1,0 +1,45 @@
+When modifying a member of a structure, rather than doing
+  (*p).x++;
+
+we can do this
+  p->x++;
+
+Typedefs allow you to make a "new type" using a struc, which allows you to refer to it without the struc prefix
+
+  struct pointer {
+    int x;
+    int y;
+  };
+  
+  struct pointer.a = 10;
+
+vs.
+
+  typedef struct {
+    int a;
+    int b;
+  } pointer;
+  
+  pointer.a = 10;
+
+static variables are accessible throughout a file, while global variables are accessible outside a file.
+static int a;
+vs
+global int b;
+
+same with functions!
+
+3 types of memory allocation:
+  static - allocated when the program starts and is freed once the program ends.
+  automatic - allocated when a function starts and is freed once the program ends.
+  dynamic - user has complete control over when the memory is allocated and deallocated during the course
+      of the entire program. Useful for data structures.
+
+Dynamic allocation:
+  struct <structType> *<structName>  = malloc(sizeof(<structName>)); //for allocating memory to a structure
+  free(<structName>); //for deallocating/freeing that memory
+  
+When dyn alloc multidimensional arrays, remember to free individual rows, planes, even cubes first before
+      freeing the entire thing.
+
+Stopped at linked lists!!
