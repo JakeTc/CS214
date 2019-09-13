@@ -1,0 +1,97 @@
+Last lecture: pointers
+
+variable that holds memory address to a (something).
+
+Why are pointers typed if all they hold is a memory address?
+  -To interpret memory, need size and format.
+  -In order for pointers to interpret their memory, need to be typed.
+
+* - dereference, go to that memory address
+& - address, gets the address of that space of memory
+
+int c = 3;
+int *b = &c;
+int **a = &b;
+
+a -> b -> c
+
+printf("%d\n", **pptr);
+
+
+--------------------------------------------------------------------------------------------------------------------
+int a[] = {3, 4};
+int *ptr = a;
+
+*(a + 1) --> gives back 4
+ptr[1] --> also gives back 4
+
+let g be a pointer to a 2d array
+g[1][2] is equivalent to:
+*(*(g + 1) + 2)
+
+--------------------------------------------------------------------------------------------------------------------
+Enumerated types
+enum boolean {false = 0, true = 1};
+or
+enum boolean {false, true}; <--assigns the first value 0, the second 1, the third 2, etc.
+
+enum boolean value = true;
+
+allowed to put enum outside main method
+
+enum {jan = 1, feb, mar, ...} will assign the values 1, 2, 3, ... to the months.
+--------------------------------------------------------------------------------------------------------------------
+enum boolean {false, true}
+typedef enum _boolean boolean;
+
+_boolean is a throwaway type
+any names with _ are used just to make the type
+
+can also do this
+typedef enum _boolean {false, true} boolean;
+
+typedef struct _thing {
+  int a;
+  int b;
+} thing;
+
+this does the same thing, only with structs.
+
+typedef <type> <newType>
+or
+typedef enum <type |{value1, value2, etc}|> <newType>;
+--------------------------------------------------------------------------------------------------------------------
+argc --> tells how many arguments are invoked
+argv --> stores the arguments
+argv[0] <--name of executable
+usually ./a.out
+
+argv[1]; <--access second parameter
+
+./a.out hello <--hello is stored in the second parameter of argv
+
+./a.out hello there <-- stores the arguments as two separate elements of argv
+./a.out "hello there" <--stores this as one argument @argv[1]
+
+to find size of a particular argument, use strlen(arg[i]); or a pointer that iterates through the argument string
+
+play around with this!!!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
