@@ -38,6 +38,9 @@ same with functions!
 Dynamic allocation:
   struct <structType> *<structName>  = malloc(sizeof(<structName>)); //for allocating memory to a structure
   free(<structName>); //for deallocating/freeing that memory
+
+  malloc returns a void pointer if it succeeds, null if it fails.
+  use velgrind to find memory leaks
   
 When dyn alloc multidimensional arrays, remember to free individual rows, planes, even cubes first before
       freeing the entire thing.
