@@ -1,0 +1,87 @@
+Questions:
+Something about a parsing method that may be used in the future?
+
+
+1 + 2 ; 3 + 4 <---ILLEGAL
+1 + 2; 3 + 4 <--- LEGAL
+only single digits
+find type of expression based upon operator! ex. 1 OR 2
+numbers allowed in logic operator?
+Need a test plan! explains why you tested the values that you did test.
+two operand and one operator for all operations EXCEPT logical "NOT"
+
+the more you sweat in peace, the more you bleed in war O_O
+ - Plan code before execution
+--------------------------------------------------------------------------------------------
+
+What did we talk about last lecture?
+- enums
+  (enums and cases go well together!)
+
+case logical, do this...
+case arithmetic, do this...
+maybe make an enum for logical or arithmetic operators
+
+typedef
+  renames internal types
+  renames your types (enum, union, struct)
+
+pointers
+  allow you to explicitly deal with memory.
+  sizeof(pointer) == (on ilabs) 8
+  * == dereference, go to that mem address and look at memory there
+  & == address, get address of memory there
+
+int array0[] = {1, 22,8 , 5};
+int * test0 = array0; <--do not need "&" for arrays since the array is already a pointer
+
+int something = *(array0 + 2);
+int somethingELse = (*array0) + 2;
+
+array[i] is the same as *(array + i)
+--------------------------------------------------------------------------------------------------
+
+so far only using static pointers.
+
+man malloc <--manual page for malloc!
+
+use like this: malloc(numBytes)
+or like this: malloc(sizeof(int * 10)); <--hint: use this one!
+
+if malloc doesnt work, it will return NULL
+
+casting works like in java!
+can also cast typedefs!
+
+int *ptr = (int*)malloc(10*sizeof(int));
+if (ptr == NULL)
+{
+  printf("rip");
+  return -1;
+}
+
+making a linklist
+
+typedef struct _Node
+{
+  int data;
+  struct _Node next; <--NOT OK, MAKE THIS A PONTER INSTEAD!!! (struct *_Node)
+}Node;
+
+Node *linklist = (Node*)malloc(sizeof(Node));
+
+the way you release memory:
+free(ptr)
+
+
+
+
+
+
+
+
+
+
+
+
+

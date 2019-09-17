@@ -46,3 +46,7 @@ When dyn alloc multidimensional arrays, remember to free individual rows, planes
       freeing the entire thing.
 
 Stopped at linked lists!!
+
+---------------------------------------------
+scp <--- command for connecting to a local directoy
+gdb --args ./<Filename>
