@@ -1,0 +1,73 @@
+What we talked about last time
+
+function pointers!
+pointers have an address to a  part of memory
+allowed to access both data AND instructions
+
+How to build a function pointer
+<function return type> (*<pointer name>) (|<param1 type>| ..., |paramN type|) = <function name>;
+
+Example
+int (*sum) (int int int)
+int (*fnPtr)(int, char) = ...
+
+fnPtr(1, 'a'); <--this will run the function that fnPtr points to
+
+stuff(void *a, void *b, int (*comparator)(void*, void*)) {
+	comparator(a, b);
+
+	return 0;
+}
+
+const char a = 2; <--declares a constant value
+
+char const *ptr = &a <---cannot point to anuthing else, but you can change the value at that address
+
+const char *ptr = &a <---cannot change the value at that address but can point to anything else
+
+            vvv cannot change the address that ptr points to!
+const char const *ptr = &a; <--locks down the data that
+^^cannot change the value of A anymore
+
+How to make a constant not a variable
+
+
+#define AVALUE 2;
+{
+	printf("%d\n", AVALUE);
+
+}
+
+during the preproccessor stage, #define will take the first sequence of 
+characters in that line and LITERALLY replace it with the other
+
+Macros: definitions with parameters
+#define ZERO(x) 0 == x
+{
+int a = 0
+print ZERO(a)
+}
+
+will return true!
+
+#define SQUARE(x) x*x
+
+print SQUARE(3+2)
+
+will print out 11 because replacing x with 3+2 makes
+3+2*3+2 = 11
+
+Header files are a way to store your defnitions, types, enums, other header files and libraries
+and function names
+DO NOT COMPILE THESE
+instead of pointy brackets, use quotations
+
+#include "header.h"
+
+To protect your header files from being read multiple times
+ifndef _HEADER_H <--checks if this has been definied
+#define _HEADER_H <--if it hasnt been defined yet, go ahead and read the rest of the header file
+
+
+
+
