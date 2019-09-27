@@ -1,0 +1,162 @@
+What did we do last time?
+
+Definitions: text replacement
+Macros: definitions with parameters
+
+Both happen before code is compiled
+be careful with order of operations!
+
+
+Header files
+put all definitions, macros, enums, typedefs, other headerfiles, other libraries... etc
+...things that  define the environment in which your code is executing
+make sure that u wrapp header files in define protection (#ifndef <name>... #endif)
+
+
+----------------------------------------------------------------------
+
+int addone(int arg); <-----Allowed to put function declarations in header files!
+				BUT NO FUNCTION DEFINITIONS!!!
+
+int main(int argc, char* argv[]) {
+	int a = addone(2);
+	
+	
+	return 0;
+}
+
+---------------------------------------------------------------------------
+main.c
+	#include "header.h";
+
+	int addone(int arg); <-----Allowed to put function declarations in header files!
+					BUT NO FUNCTION DEFINITIONS!!!
+	
+	int main(int argc, char* argv[]) {
+		int a = addone(2);
+	
+	
+		return 0;
+	}
+
+header.h
+	#ifndef _HEADER_H
+	#define _HEADER_H
+
+	int addone(int arg);
+
+	#endif
+
+---------------------------------------------------------------------------
+
+Library: looks like a c file, BUT there is no main file!
+When you compile a library, it does NOT make an executable
+Library is usually named the same as the header, but with .c instead of .h
+can also include headers in libraries
+
+---------------------------------------------------------------------------
+main.c
+	#include "header.h";
+
+	int addone(int arg); <-----Allowed to put function declarations in header files!
+					BUT NO FUNCTION DEFINITIONS!!!
+	
+	int main(int argc, char* argv[]) {
+		int a = addone(2);
+	
+	
+		return 0;
+	}
+
+header.h
+	#ifndef _HEADER_H
+	#define _HEADER_H
+
+	int addone(int arg);
+
+	#endif
+
+header.c
+	int addone(int arg) {
+		return arg + 1;
+	}
+---------------------------------------------------------------------------
+
+
+side note: can give gcc different arguments to control what/when/how it compiles files
+-o <---makes the executable
+-c <--stops at assembly, does not make the executable
+	use this for libraries
+
+to compile libraries, do:
+gcc -c header.c
+
+^^^creates header.o
+
+to use libraries with a runnable c file:
+gcc main.c header.o
+
+to change executable name
+gcc -o main main.c header.o
+or
+gcc main.c header.o -o main
+
+to make compiling easier, use makefiles
+---------------------------------------------------------------------------------------------
+built in definitions
+NULL
+errno <--way to return errors when a function cannot return the error
+
+printf("Eror in file: %s on line: %d\n", __FILE__, __LINE__);
+double underline == compiler directives
+there are a LOT of compiler directives
+
+---------------------------------------------------------------------------------------------
+man malloc <---gives u manual page for malloc for that version of c
+
+in malloc manual page, there is:
+
+malloc
+free
+
+calloc
+realloc
+
+calloc gives contiguous (continuous) dynamic memory allocation
+allocates a continuous block of memory
+usually not needed (like unions)
+
+realloc --> 'reallocate' dynamically allocated memory
+takes malloced memory, allocates the new amount, transfers the data, and frees old data
+realloc does
+another malloc
+transfer data
+free old name <--this is where the problem lies
+
+
+char *ptr = (char*)malloc(sizeof(char) * 40);
+...
+ptr = realloc(ptr, 80);
+
+problem: allowed to return before the operation is done.
+if realloc returns the pointer before free has happened,you might get the pointer
+before the new space has been applied
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
