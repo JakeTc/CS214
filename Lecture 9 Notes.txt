@@ -1,0 +1,78 @@
+Midterm @oct 16, 2140-2300
+Final @dec 18
+
+Last lecture
+
+Header(file):
+	contains
+		definitions: defs, macros
+		types: typedef, enum, struct, unions
+		prototypes/fn headers (but no implementation/executable code)
+
+Libraries:
+	contains
+		includes
+		executable code to pair up with prototypes declared in header
+
+
+gcc sourcefile.c ---> executable (default a.out)
+gcc -c library.c ---> library.o (compiled object file)
+gcc sourcefile.c library.o --> builds executable using implementations in the library
+gcc -o name sourcefile.c library.o
+
+to edit something, have 4 steps
+	delete library.o
+	delete executable
+	rebuild library.o
+	rebuild executable
+
+Makefiles
+	automate/script building code
+	file must be named "Makefile" or "makefile"
+	
+	
+in order for directive to be run, requirements must ecitd
+		
+<directive>: |<requirements>...<reqs>|
+	<cmd>
+
+EXAMPLE
+all: test.c library.o
+	gcc -o test test.c;
+
+Library.o" library.c
+	gcc -c ;ibrar
+	
+clean:
+	rm a.out; rm library.o;
+
+Example:
+library.h
+	(definied)
+	ALWAYS have guard around header files
+
+
+WHen freeing, combine free blocks together!
+have it go through the LL from beginning to stitch back metadata
+When 
+
+char space[10];
+
+int* ints = (int*)space;
+
+ints[0] = 127;
+space[4] = 'b';
+
+Limit cases:
+20 bytes left in array (metadata managing it is 16 bytes)
+Metadata = 16 bytes big
+user comes by and asks for 4 bytes
+20 - 4 = 16 bytes remaining
+
+If there is extra space but the metadata would take up all of it, 
+do not make metadata because it creates more work
+
+if user asks for space near the end of the array, just allocate the rest of the array to them
+
+if malloc is run, and no tags are there,
+
