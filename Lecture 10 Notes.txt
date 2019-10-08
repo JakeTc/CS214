@@ -1,0 +1,99 @@
+What were we talking about last time?
+
+Makefiles
+automates the compilation process (build)
+
+<directive>: <reqs...>
+(tab)	cmd
+
+if reqs are not fulfilled, will look later in file for directives named those requirements
+
+two generic directives:
+all (usually the first directive)
+clean (usually the last directive)
+
+Headers/Libraries
+	headers: defs (no compilable code)
+	libraries: code implementations promised in a header (no main)
+
+every header file should have: 
+	#ifndef _NAME_H
+	#define _NAME_H
+		...content...
+	#endif
+
+
+SMAPLE CODE(broken ofc)
+header beginning...
+#define malloc(x) dumbmalloc((x), __LINE__, __FILE__)
+
+void* dumbmalloc(int, int char*);
+header end...
+
+main:
+	int *ptrIHope = malloc(sizeof(int) * 100);
+
+printf can print characters (using %c)
+	(can print characters as their integer values with %d)
+	hexadecimal (using %X)
+	string (%s)
+	%u?
+	\t = tab 
+	\r = return (goes to the front of the line)
+	\n = goes to next line AND does the return
+	\\ = \
+	
+	
+CAN use null terminator for int array, just need to do it manually
+
+Big ndian?
+Little ndian?
+
+in stdio page, can print to string, to file, etc...
+safest way to print to string: use snprintf //lets you print to a string w/ OUBounds checking
+
+const char *format;//indicates how the data is formatted
+	
+int num = 2;
+snprintf(string, size, <text>, *format...);
+
+scanf(*format,...)
+fscanf(FILE, *format...)
+sscanf(*str, *format...)
+
+weird little formatting bumps in scanf/printf
+"%d" keeps all spaces
+" %d" will clear all spaces in front of %d
+
+used to have file scripters in ilabs, now have file streams!
+
+File descriptors <--like an IO endpoint or node or source
+(IO endpoint/plugs/sockets ... names)
+by defualt... each program has:
+	stdin(standard in)... often wired to keystrokes from the terminal
+	STDOUT(standard out).. often wired to the terminal
+	STDERR(standard error)... often wires to the terminal
+
+cat command - concatenate files and print on the standard output
+cat test.c --> dumps all of lines in the file into the terminal
+you CAN redirect where stuff is going!
+
+cat test.c > junkfile //allows me to take the stdout and push it to that file
+cat junkfile --> will print out all of the contents of test.c
+
+grep --> searches for the lines that has its argument and prints only those lines out
+cat test.c | grep str
+
+cat test.c | grep str | wc <--wc will count the amount of words that it finds?
+
+cat test.c | grep str | wc > junkfile <---stores this in junkfile
+
+CAREFUL!!! > command will completely replace the contents of the file that it is writing to
+
+
+
+
+
+
+
+
