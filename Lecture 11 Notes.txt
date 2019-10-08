@@ -1,0 +1,50 @@
+Systems midterm
+On wednesday
+
+identification
+	what is "this"?
+	definition
+
+function
+	ok now what does it do?
+	code sample
+	
+operation
+	when should/shouldnt you do this
+	is this a good idea?
+	is this a bad idea?
+	will this work?
+	comparing code, making an alternative version of this code.
+	
+may be given code to read and answer questions about it
+	need to be able to understand code, find problems, and fix them
+	to practice for this, simply test random stuff
+
+Exam goes up to everything on oct 10.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

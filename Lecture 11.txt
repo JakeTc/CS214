@@ -22,11 +22,132 @@ may be given code to read and answer questions about it
 
 Exam goes up to everything on oct 10.
 
+What did we do last time?
 
+Headers & libs
 
+Makefiles
 
+STDIN, STDOUT, STDERR
 
+printf, sprintf
 
+printf- prepare formatted string and push to STDOUT
+sprintf- prepare formatted string and write it to some memory address (so you have a pointer to it)
+
+printf(<format string>, |variable list|);
+%u <-- unsigned integer
+
+sprintf(const char *location, <format string>, |variable list|); //risky, no size specified
+	snprintf(const char *location, int maxbytes, <format string>, |variable list|);
+		unless if there is a particular reason, ALWAYS use snprintf
+		if dont know size, use svprintf
+
+fprintf - prepare formatted string and push to a file.
+	format is basically the same
+	fprintf(<file stream>, <format string>, |variable list|);
+	-subliminal message?
+
+also scan verson of all of these.
+sscanf, fscanf, scanf, snscanf, svscanf.
+
+STDIN/STDOUT/STDERR
+	defualt names for I/O targets
+	STDERR is usually for non-fatal errors
+	can redirect all of these using > symbol (at cmd line)
+
+output control (at cmdline)
+redirect STDOUT to a file:
+	cmd > filename
+	(might be some formatting differences, such as tab space, color, font, spacing)
+	(But, this command will overwrite everything in the file)
+
+redirect STDOUT to a file, adding it to the end
+	cmd >> filename
+	(adds the output to the end of the file)
+
+piping
+	make the STDOUT of one thing the STDIN of another thing
+	i.e. it connects two programs together. A literal pipe
+	cmd | cmd
+	cmd | cmd | cmd | ... | cmd
+	can keep going -->
+
+	ls -->lists all files
+	wc --> finds the wordcount of its input
+	cat opens file, copies, and pastes it to STDOUT
+	example: 
+	ls | wc --> returns the amount of words in ls
+	cat test.c | wc --> returns the amount of words in the test.c file
+		(wc test.c --> also works)
+	cat ./* | wc <--takes all files in directory and counts all characters and word files
+
+cat test.c >> somefile
+	
+head - shows the first part of a file
+tail - shows the last part of a file
+
+tail -n <amt of lines> test.c <--prints out a certain amount lines from the end of a file
+	head does the same thing, but for the front
+
+head <filename>
+	by defualt, first 10 lines are outputted
+
+tail <filename>
+	last 10 lines are outputted
+
+use "-n" to indicate the number of lines that you want to see
+
+ls | head -n 110 | tail -n 10 <---gets all of the items in lines 100-109
+
+od - dump files in octal format
+od -t -->dump files in a specific format
+od -t c test.c <---will dump entire file as characters (indicated by c)
+od -t x test.c <--will dump entire file as hexadecimal
+
+od -t x test.c | head -n 1 -->prints out the first 10 lines
+
+ls -alF <--tells you uuhhhh everything
+	-name
+	-user who made it
+	-how big is it
+	-date it was made
+	-alphabet soup --> permission code (r, w, x) --> [read, write, execute]
+
+groups --> contains users
+	groups give certain users certain permissions
+
+every file has permissions for
+	-owner
+	-file's group
+	-all users
+
+in alphabet soup, lists the permissions allowed for each consecutive person/persons
+
+-rwx-xr-x
+	owner can r w x
+	group can r x
+	ALL users can x
+
+chmod <---change permissions of the file
+	chmod <target> <+/-> <permission type> <filename>
+			^^^this is add/remove
+
+to allow read access for all users
+chmod a+r ...
+
+remove write access for the file's assigned group
+chmod g-w ...
+
+targets		permissions:
+a -all		r -read
+g -group	w -write
+o -owner	x -eXecute
+u -users	O_O
+
+only owner of file is allowed to run chmod
+
+if have previous version of code that you want to save, remove write access from everybody - NOT allowed to write or even delete
 
 
 
