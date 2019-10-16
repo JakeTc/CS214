@@ -36,7 +36,7 @@ int array0[] = {1, 22,8 , 5};
 int * test0 = array0; <--do not need "&" for arrays since the array is already a pointer
 
 int something = *(array0 + 2);
-int somethingELse = (*array0) + 2;
+int somethingElse = (*array0) + 2;
 
 array[i] is the same as *(array + i)
 --------------------------------------------------------------------------------------------------

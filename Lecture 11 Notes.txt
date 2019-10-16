@@ -130,7 +130,7 @@ in alphabet soup, lists the permissions allowed for each consecutive person/pers
 	ALL users can x
 
 chmod <---change permissions of the file
-	chmod <target> <+/-> <permission type> <filename>
+	chmod <target><+/-><permission type> <filename>
 			^^^this is add/remove
 
 to allow read access for all users

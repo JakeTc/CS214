@@ -1,0 +1,162 @@
+Midterm summation
+identification
+	what is this
+function
+	what does this do
+operation
+	how do you use this (knowing its function)
+
+(look up unions, function pointers, etc)
+
+Last lecture
+talked about i/o in code
+	printf, fprintf, sprintf, snprintf, svprintf
+	scanf, fscanf, sscanf, snscanf?, svscanf?
+
+snprintf(strAddress, size, format, parameters);
+
+talked about i/o outside code
+	cat, >, >>, |, head, tail
+
+> vs >>
+	redirect vs append
+	redirect overwrites file
+	append adds to the end of the file
+	both will create a new file if the specified filename does not exist
+
+head -n 20 things <--pulls first 20 lines
+
+cat thefile | head -n 170 | tail -n 50 <--will return lines 121-170 of the file
+
+diff- prints out the differences betweeen files.
+	used in conjunction w/ wordcount to see if two files are exactly the same
+		if 0, files are the same
+		if not 0, files are different
+
+chmod <target><+/-><permission> <filename> <--file permissions!
+targets	permissions
+o	r
+g	w
+u	x
+a-all
+
+vvThe beginning dash is a dash if it is a file, d if it is a directory
+  o   g   u
+-|---|---|---
+  111 110 100
+  7   6   4
+
+chmod 764 <filename> <--will set multiple permissions
+chmod 600 <filename> <--will give owner r/w and everyone else nothing
+chmod 444 <filename> <--will give everybody read permission
+
+chown <--allows you to change owners and groups of file
+---------------------------------------------------------------------------------
+functions are just a special kind of data
+can apply execute to different file
+something that is executable is a certain type of data
+
+Process --> the OS's abstraction for running code
+sourcecode --> compiled binary --> process
+
+when you run compiledCode (using ./), the OS makes a process
+
+to create a process, use fork
+
+creates a new process by "duplicating" the calling process
+	same variables, instructions, programcounters, instructions, register values, etc
+	but there are differences
+	different address space
+	different processs identifier (PID)
+	every process has the PID of its parent (PPID)
+		-So multiple children have different PID but the same parent PID
+
+To differentiate between child process and parent, look at the return value of fork
+	if parent, returns PID of child
+	if child, return 0
+	if something else, error, child processs was not created
+
+to load different code into the process, use exec
+exec(<binary executable> ...)
+	flushes out all of the old data,
+	loads new code in
+	reallocates memory needed to run the new code
+
+exec <--command to change a process
+to create a completely new process, fork a parent process, and exec your new code onto it
+
+Side notes:
+	really strong cell wall around a process
+	one process cannot access data from another, except through STDIN, STDOUT, STDERR
+	dont need to fork to exec, and dont need to exec to fork, but usually used together
+	can use fork/exec to programatically run ANOTHER process when a process is already running
+	fork is weird: duplicates the state that you are in, including computational state
+		so when fork finishes, both processes start after fork
+		so both processes think that they both have just ran fork
+	
+	process framepointer is the start of a process
+	process framepointer is the 
+	
+	forkbomb: where after forking, both parent and child fork again, and then their children and themselves fork again
+
+To find your processes that are running, use in terminal:
+ps
+
+to find all processes that are running, and processes that will run in the future:
+ps aux
+
+to find specific processes (say, what processes YOU are running)
+ps aux | grep <username>
+
+top <---interactive view of what the machine is doing (think task manager)
+	-to get out of top mode, use q
+
+htop <--- pretty version of top, uses ascii to make visua representation of what
+
+ulimit <--get and set user limits
+	-used to prevent forkbombing
+
+EXAMPLE CODE(in main). This will 
+-----------------------------------------------------------------------------------------------------
+int pid = fork();
+if(pid == 0) {
+	execv("./a.out", NULL);
+}
+-------------------------------------------------------------------------------------------------
+How to kill a process:
+	letting machine know that you are done with a process
+	malloc --> free
+	fork() --> wait
+
+wait <-- makes the parent stop running until the child stops running
+
+side idea: any process created was created by another process
+	"how was first cell made?" <--> "how was first process made (in a particular computer)"
+	one answer: the scheduler
+		schedules all processes
+	another answer: init
+		init is loaded into memory fr/ harddrive at startup
+		starts the scheduler, or is the scheduler
+	in any case, the first process has the PID of 0
+
+exec only returns on error b/c if it succeeds, the exec command gets replaced by new code
+
+child PID can NEVER be zero b/c if it is, then the parent is returned 0 as well
+	this tells both the parent and the child that they are the child
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

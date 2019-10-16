@@ -55,7 +55,7 @@ int typelessComparator(void *arg0, void *arg1, int (*compare)(void*, void*)) {
 	return diff;
 }
 
-int charComparator(void* firstArg, coid* secondArg) {
+int charComparator(void* firstArg, void* secondArg) {
 	char* arg0 = (char*)malloc(sizeof(char));
 	char* arg1 = (char*)malloc(sizeof(char));
 

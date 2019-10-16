@@ -35,7 +35,7 @@ main:
 
 printf can print characters (using %c)
 	(can print characters as their integer values with %d)
-	hexadecimal (using %X)
+	hexadecimal (using %x)
 	string (%s)
 	%u?
 	\t = tab 

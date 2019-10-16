@@ -8,7 +8,7 @@ How to build a function pointer
 <function return type> (*<pointer name>) (|<param1 type>| ..., |paramN type|) = <function name>;
 
 Example
-int (*sum) (int int int)
+int (*sum) (int, int, int)
 int (*fnPtr)(int, char) = ...
 
 fnPtr(1, 'a'); <--this will run the function that fnPtr points to
@@ -30,7 +30,6 @@ const char const *ptr = &a; <--locks down the data that
 ^^cannot change the value of A anymore
 
 How to make a constant not a variable
-
 
 #define AVALUE 2;
 {
@@ -68,6 +67,7 @@ To protect your header files from being read multiple times
 ifndef _HEADER_H <--checks if this has been definied
 #define _HEADER_H <--if it hasnt been defined yet, go ahead and read the rest of the header file
 
+#endif <---ends the preprocessor if statement
 
 
 

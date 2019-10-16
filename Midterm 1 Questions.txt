@@ -1,0 +1,272 @@
+What would this return?
+int *a = some memory address
+char *b = some memory address
+return *(a + b + 1) vs return *(b + a + 1)
+DOES NOT COMPILE
+but if it did, a determines the "type" of the expression
+equivalent to (if b is interpreted as a number)
+a + sizeof(char)(b) + sizeof(char)(1)
+
+------------------------------------------------------------------------
+is: int const *ptr = 3;
+equivalent to: int ptr = 3;
+RETURN TO THIS
+
+------------------------------------------------------------------------
+Notes (not a question)
+int a = 3;
+int *b = &a;
+int **c = &b;
+
+&b == c;
+*b == a;
+b = b;
+
+c --> b --> a
+so & goes "backwards" and * goes "forwards"
+
+-----------------
+This is a question!
+so **c == *b == a
+BUT &&a =/= c!
+MA of c == MA of the MA of b
+the MA of b doesnt have a memory address (i think)
+
+------------------------------------------------------------------------
+What does this do?
+int *a[3];
+a pointer to (a pointer that points to 3 int spaces on the stack)
+or
+a pointer that points to 3 pointers stored on the stack
+
+In other words: Which of the following would break?
+a[0][2];
+or
+a[2][0]; 
+
+In addition, what is the order of operations of:
+&a[2]; {*(&a + 2) vs &(*(a + 2)) == a + 2
+return (a + 2) or the data at memory address (&a + 2)?
+
+------------------------------------------------------------------------
+Let int a = 3
+what is the order of operations of:
+&*a vs *&a
+one can seg fault, one might not
+
+------------------------------------------------------------------------
+typedefing things (notes)
+
+enum _bool {false, true};
+typedef enum _bool bool;
+vs
+typedef enum _bool {false, true} bool;
+
+struct _thing{int a, char b};
+typedef struct _thing thing;
+vs
+typedef struct _thing{int a, char b} thing;
+-------------------------------------------------------
+argc == num args + 1
+argv == array that stores the executable's name and the arguments
+----------------------------------------------------------------------
+static stuff? global scope
+----------------------------------------------------------------------
+casting an int pointer to be an int function ptr
+vs
+casting a int function ptr to be an int pointer
+
+what would this do?
+int (*fnptr) () = doSomething;
+*fnptr;
+or
+fnptr[3];
+
+I feel like I am not prepared with function pointers... idk O_O
+---------------------------------------------------------------------
+ifndef and defining for MORE than just headers (like definitions and macros)
+---------------------------------------------------------------------
+when you name or "promise" a function in a header file, but do not have
+a library with the function definition, when will an error be thrown
+(if any errors)?
+---------------------------------------------------------------------
+using ifndef to turn c files with "main" into libraries?
+	wrapping main in #ifndef
+
+---------------------------------------------------------------------
+errno?
+
+---------------------------------------------------------------------
+cannot use realloc because when it returns, it might not be done with 
+its operation! You may get a pointer back that doesnt have any memory
+attached to it!
+
+---------------------------------------------------------------------
+How much do we need to know about makefiles?
+
+---------------------------------------------------------------------
+format specifiers that we need to know?
+
+---------------------------------------------------------------------
+escape codes that we need to know? and what about \n vs \r\n?
+
+--------------------------------------------------------------------
+" %d" will clear all spaces in front of %d!
+
+---------------------------------------------------------------------
+What do we need to know about files, streams, descriptors, and
+stdIN, OUT, and ERR?
+
+---------------------------------------------------------------------
+cmd line commands:
+>	takes the stdout of the cmd and pushes it to the file
+	<cmd> > <file>
+	
+>>	takes the stdout of the cmd and appends it to the file
+	<cmd> >> <file>
+	
+|	takes the stdout of one cmd and makes it the stdin of another cmd
+	<cmd1> >> <cmd2>
+	
+cat	concatenate files and print on the standard output
+	cat <file1> <file2> ...
+	
+wc	gets the word count of its input (delim = space?)
+	wc <file> OR cmd | wc
+
+grep	will look for lines that have its arg, and output them
+	cmd | grep <arg>
+
+ls	know what this is
+
+./*	refers to all of the files in a given directory
+
+head	shows the first few lines of a file
+	default is 10
+	add -n <num> to specify a num
+
+tail	shows the last few lines of a file
+	same stuff as head
+
+od	dump files in octal format
+	add -t <format> <file> to specify a format and file
+	x for hexadecimal
+	c for character
+	octal by default
+
+diff- prints out the differences between files (as strings/lines)
+
+------------------------------------------------------------------
+ls -alF	says everything about a file
+	name
+	user
+	size
+	date
+	permission code
+
+chmod <target><+/-><permission type> <filename>
+
+targets		permissions:
+a -all		r -read
+g -group	w -write
+o -owner	x -eXecute
+u -users	O_O
+
+-------------------------------------------------------------------
+In class!!
+-------------------------------------------------------------------
+union vs struct
+
+struct nameStruct {
+	int a;
+	double b;
+	float c;
+};
+get a piece of memory for each individual part
+minimum size is sum of size of all types
+
+union nameUnion {
+	int a;
+	double b;
+	float c;
+};
+only get enough space to store the biggest thing.
+minimum size is the size of the largest type
+
+------------------------------------------------------------------
+pre vs post increment
+
+
+------------------------------------------------------------------
+function pointers
+int a = 2;
+int * ptr = &a;
+
+int somefunction(char stuff, double things)
+{...}
+
+int (*fnptrname) (ARGTYPES) = somefunction;
+fnptrname(ARGS);
+
+int *p = &a;
+int(*broken)(char, double) = (int (*)(char, double))p
+void (*boom)() = (void(*)())p;
+
+macros
+"special" definitions
+#define VALUE 2
+
+#define STUFF(x) x+=2
+^^anything between parentheses will be bound to "x"
+then, will replace STUFF(x) with x+=2
+usually, to avoid arithmetic errors, have parentheses around parameters
+#define STUFF(x) (x)+=2
+
+------------------------------------------------------------------
+data types
+conditionals
+enums/structs/unions/typedef
+static/const
+fnptrs
+makefiles
+headers/libraries
+definition
+shell commands
+	cat, ls, grep, ps???, less, more, |, >, >>, head, tail
+
+if you see static inside of a function, it can be reference
+
+3 cases for const (and pointers)
+int * (const ptr1);
+	ptr1 = &y; NO
+	*ptr1 = 6; YES
+
+const int * ptr2; 
+(this is equivalent to: "int const * ptr2;")
+	ptr1 = &y; YES
+	*ptr1 = 6; NO
+
+const int * const ptr2;
+	ptr1 = &y; NO
+	*ptr1 = 6; NO
+
+KNOW DEFINE!!!!
+#define Value 5000
+
+
+int x = 10;
+char * ptr1 = &x;
+int * ptr2 = &x;
+
+if(++ptr1 < ++ptr2) {
+	printf("true");
+} else {
+	printf("false");
+}
+
+
+
+
+
+
+

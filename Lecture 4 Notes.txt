@@ -48,7 +48,7 @@ _boolean is a throwaway type
 any names with _ are used just to make the type
 
 can also do this
-typedef enum _boolean {false, true} boolean;
+typedef enum _boolean {false, true} bool;
 
 typedef struct _thing {
   int a;
@@ -57,7 +57,7 @@ typedef struct _thing {
 
 this does the same thing, only with structs.
 
-typedef <type> <newType>
+typedef <struct/enum/union/etc> <type> <newType>
 or
 typedef enum <type |{value1, value2, etc}|> <newType>;
 --------------------------------------------------------------------------------------------------------------------

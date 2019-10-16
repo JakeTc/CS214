@@ -29,8 +29,7 @@ int main(int argc, char* argv[]) {
 main.c
 	#include "header.h";
 
-	int addone(int arg); <-----Allowed to put function declarations in header files!
-					BUT NO FUNCTION DEFINITIONS!!!
+
 	
 	int main(int argc, char* argv[]) {
 		int a = addone(2);
@@ -43,7 +42,8 @@ header.h
 	#ifndef _HEADER_H
 	#define _HEADER_H
 
-	int addone(int arg);
+	int addone(int arg);<-----Allowed to put function declarations in header files!
+				BUT NO FUNCTION DEFINITIONS!!!
 
 	#endif
 
@@ -58,8 +58,7 @@ can also include headers in libraries
 main.c
 	#include "header.h";
 
-	int addone(int arg); <-----Allowed to put function declarations in header files!
-					BUT NO FUNCTION DEFINITIONS!!!
+	int addone(int arg); 
 	
 	int main(int argc, char* argv[]) {
 		int a = addone(2);

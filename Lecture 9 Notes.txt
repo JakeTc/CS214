@@ -41,7 +41,7 @@ all: test.c library.o
 	gcc -o test test.c;
 
 Library.o" library.c
-	gcc -c ;ibrar
+	gcc -c library.c
 	
 clean:
 	rm a.out; rm library.o;

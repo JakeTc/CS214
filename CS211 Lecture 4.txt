@@ -1,2 +1,0 @@
-velgrind finds memory leaks
-gdb is a debugger
