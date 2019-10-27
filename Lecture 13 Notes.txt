@@ -1,0 +1,83 @@
+Process commands
+	fork - copies a Process, "duplicate" of the current (Parent) process
+		- returns 0 to child, returns child's PID to parent (strictly >0)
+		- differences on fork
+			> Parent PID
+			> PID
+			> address space (location of variables in memory)
+	wait - end a process
+	- Tells opeating sylstem that you are done with a child process once it returns...
+	- called by the parent usually
+	- wait() is a blocking call! stops a process until it is able to finish wait()
+
+		
+	exec - load a binary file onto a process and executes it
+		- flushes out the current process, reallocates new code, and starts running it
+		- only returns on error. If it succeeds, the stack is flushed out, and has 
+			nothing to return to
+
+Process: operating system's abstraction for currently runNING code
+
+ulimit -u --> determines what your process limit is
+ulimit -S -u <NUMOFPROCESSES> --> sets your process limit
+
+Zombie: process that has run all of its runnable code, calculated aby return value, posted EXIT ... but ...
+	no one has called wait() on it. 
+	- will take up space, runtime, until someone calls wait on it
+
+Orphan Process: a process whose parent has disappeared (parent is no longer in the system)
+
+How to deal with Zombie Orphans?
+	- need someone to adopt them and call wait()
+	- get init/the scheduler (oftern PID 0)
+		- Erase zombPhan's PPID, replace it with its own, and call wait on it
+
+Signal
+	Kind-of like an exception... with a few differences
+	
+	instr0
+	instr1
+	instr/---------> signal called here
+	instr3
+	instr4
+	instr5
+	
+	run OS os system handler
+	OS chooses a function to run to handle the signal
+	OS passes control to that function
+	signal handler runs
+	returns, and then original process continues (at instr3)
+
+Why signals happen:
+	stops and deals with important things
+	not necessarily for errors only, but often is
+		divide by 0
+		segmentation fault
+		resize window of terminal?
+
+to kill a process, send it the kill signal
+	- kill <PID>
+	can use kill to send other signals too
+	- kill -l <signal>
+
+ps aux | grep jt919
+
+can write your own signal handler!
+	man signal
+	have a func that returns void and takes in an int
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

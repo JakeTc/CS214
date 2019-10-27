@@ -1,0 +1,128 @@
+Process:
+	The OS's abstraction for currently running code
+
+fork()
+	- creates a new process by duplicating the current pricess
+	- new PID, PPID, and address space (though data is copied over)
+
+wait()
+	- block until a (or a specific) child Process ends
+	- Allows the system to reuse the memory that the child was using
+	- parent can get the return values and status of the exiting child from
+	the pointer argument that it passes in.
+
+Zombies
+	- child process that have consumed all executable code, have computed return, posted EXIT signal
+	...but no one has called wait() on them yet... so they still persist
+
+Orphans
+	- Process whose parent is no longer in the system
+
+	Note: a zombie doesnt have to be an orphan and an orphan doesnt have to be a zombie
+		- child could be a zombie if parent is just busy
+		- child could become an orphan if parent suddenly exits, but still has running code
+
+signals
+	- software interrupt
+	- kinda like exception... in that you run special code to deal with it
+	- unlike exception... in that you resume at the line that was about to run when the signal occurred.
+	- send a specific signal to a specific process using kill
+
+kill
+	- man signal.h --> gets you signal names
+	- kill lets you send a signal to a specific process
+	- kill will end a process by default
+	- can make your own signal handler using signal function
+	- 
+signal handlers
+	- return void and take in an int and a sighandler
+	- signal(int signum, sighandler_t sighandler);
+	- ex. signal(SIGSEGV, segfaulthandler);
+	- cannot catch process termination signal!
+
+killall
+	- kill all processes by name!
+	- killall a.out
+
+kill -9
+	- uhhh dont do it.
+	- if all else fails tho, use this
+	- kill will force a process to exit
+	- kill -9 will forcefully clean up/reclaim the memory that the process is using
+
+atexit
+	- signal handler for exit signal
+	- exit signal happens after return
+	- takes in nothing and return nothing
+	use:
+		- void notifyExit() {
+			printf("DONE!");
+		}
+		
+		int main...
+		
+			atexit(notifyexit);
+	- if you kill a process manually, the process doesnt send the exit signal
+	- if you get a signal that aborts, does not send the exit signal
+
+exit
+	- exit(0) sends the exit signal
+	- _exit(0) does not! more powerful, messy, unnice
+	
+signal default action
+	A == abort
+
+--------------------------------------------------------------------------------------------------
+Why processes?
+	- simultaneity
+	- isolation (different address space)
+
+Threads
+	- another process that lives in the same context
+	- activation record - the currently active stack frame
+	- Promote a function to be autonomous
+	- sort of like a function that does not need to return
+	- threads basically make another stack in your process
+	- WARNING: no isolation!
+		but no need to make a new process
+		easy to send data back and forth between them
+
+Procs vs Threads
+Procs:
+	pros:
+	isolation
+	capture own signals
+	have own IO resources
+	run different code (exec)
+	
+	cons:
+	slow to build
+	slow to switch between
+	big
+	annoying/slow to move data in/out
+
+Threads:
+	pros:
+	not slow to build
+	not slow to switch between
+	not big
+	not annoying/slow to move data
+
+	cons:
+	cant capture own signals
+	cant have own IO resources
+	cant run different code (exec)
+	
+After lec questions:
+how are processes simultaneous if they have to wait for each other?
+
+
+
+
+
+
+
+
+
+
+
