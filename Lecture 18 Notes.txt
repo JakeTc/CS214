@@ -1,0 +1,99 @@
+
+Mutexes
+	deadlocks (and how to avoid them
+
+errno
+	gives you an indication of how a call failed
+	(disambiguates error)
+	
+	errno is set by the last thing that had an error
+	perror <errorNum> <--this is for terminal
+	strerror(errno) <--this is for in code
+
+File Descriptors
+Arrays
+	start addr is stores in array name
+	sizeof(<type>) * capacity chunks to end
+	
+strings:
+	start addr is stored in name
+	null terminator indicates when str ends
+	
+functions:
+	start addr is stored in name
+	go in instruction sized steps until you find ret
+	
+files:
+	refer to file with a file descriptor (indicated by a number)
+	start at...
+	go in char(byte) size steps until EOF(End of File)
+
+Headers for files:
+	sys/types.h
+	sys/stat.h
+	fcntl.h
+
+open(<filename(path w/ filename)>, <flags(r, w, rw)>);
+	flags:
+		O_RDONLY
+		O_WRONLY
+		O_RDWR
+
+close()
+
+write()
+read()
+
+read/write(<file descriptor>, <buffer(address to read into/write from)>, num of bytes to read/write>)
+	returns
+
+	CAVEAT: sometimes will not read/write everything you asked for. You need to have read/write 
+	in a loop that continuously reads/writes where the system left off until the entire read/write
+	is finished
+		
+		-I/O functions take a long time (hard drives suck!), OS might switch you out, and 
+			read/write will return early
+		-when they return early, read/write will only have a fraction of their task done
+		-use a loop to keep writing/reading until the entire task is finished
+	
+	numRead = <readamt>
+	do {
+		numRead = read(fd, &currentChar, 1);
+		printf("%c", currentChar);
+	} while(numRead > 0);
+	
+	
+	to store 10 chars in a buffer
+	char buffer[11]; //extra element for null terminator!
+	memset(buffer, \0, 11);
+	
+THIS IS HOW YOU READ
+	char buffer[101]; //extra element for null terminator!
+	memset(buffer, \0, 101);
+	int totalBytes = 100;
+	int bytesRead = 0;
+	int currRead = 0;
+	
+	while(bytesRead < totalBytes) {
+		currRead = read(fd, buffer + bytesRead, 10);
+		if(currRead < 1) {
+			/*react to error*/
+			break;
+		}
+		
+		bytesRead += currRead;
+	}
+END OF READ
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
