@@ -1,0 +1,154 @@
+Signals
+	process/thread interrupt
+	stop currently executing process and load a handler to deal with the "important event"
+	not necessarily/always an error
+	will resume at the line where the interrupt occurred
+
+Threads (libpthread)/the pthread archive
+	asyncronous function call
+	runs at the same time as your process (logically)
+	have some function run independently from the creating context (original stack)
+	essentially creates another independent stack (in the same Process) to run the function
+
+creating threads
+	pthread_create(4 args)
+		-thread handle (a way to interface/control/refer to the thread)
+		-thread attribute struct (parameterize the thread's behavior)
+		-function ptr (the function to be run as a thread)
+			must be a void*, void* function
+		-ptr to function's args (must be of type void*)
+	
+
+join
+	-blocks until thread exits
+	-gets status code from pthread_exit
+		when done with thread, DO NOT SAY RETURN
+		instead, use pthread_exit to return values
+		maybe investigate why this is the case...
+	-if thread is joinable, only after it is joined to can it be deallocated
+	-what happens if you have a thread that isnt joinable and the process ends before that thread?
+
+exit
+	-pthread_exit from threads, don't return
+	-the 'correct' way to send 'return' values back to joining (creating) context
+	-joinging context is usually the creating context, but it doesnt have to be
+		other threads can join with other threads, doesnt have to be the process calling join
+	 
+side note: use signals carefully when using threads
+
+-----------------------------------------------------------------------------------------------------------
+Making to differnet targets
+	-based on the libarary linked, you can change the behavior of the code run
+	-"dynamically linked libraries" == .dll files
+main()... {
+	#include "awesome.h"
+	
+	doStuff();
+}
+
+
+awesome.h:
+..
+#define doStuff() howdy(1, 2, 'a')
+..
+
+awesome0.c
+void howdy(int a, int b, char c)
+{
+	printf("hello\n");
+
+	return
+}
+
+awesome1.c
+void howdy(ont a, int b, char c) {
+	printf("hio\n");
+	
+	return	
+}
+
+awesome1.c vs awesome0.c
+
+to make the file in a specific way, use:
+	make <target>
+
+being able to compile code in different ways depending on how you call make
+------------------------------------------------------------------------------------------------------------
+Problems w/ threads
+
+Thread A			Thread B
+int bal = getCurrBal();		int bal = getCurrBal();
+bal = withdraw(500);		bal = deposit(500);
+
+movl	(%r2)	%r3		movl	(%r2)	%r3
+subl	$500	%r3		addl	$500	%r3
+movl	%r3	(%r2)		movl	%r3	(%r2)
+
+^^^this doesnt actually happen! odds are, cpu runs threads randomly
+could look like this:
+
+movl	(%r2)	%r3	//gets balance	
+				movl	(%r2)	%r3    //gets balance again
+subl	$500	%r3		//puts balance - 500 into r3
+				addl	$500	%r3 //puts balance + 500 into r3
+				movl	%r3	(%r2) //replaces old balance with balance -500
+movl	%r3	(%r2) //replaces balance with balance + 500
+
+if the balance is $2000, 
+
+therefore, this is a segment of code where we want to turn off parallelism
+
+MUTually EXclusive: MUTEX
+	allows you to turn on/off parallelism
+	wrap segment of code in mutex and locks it
+	if another thread attempts to access it, will block until your thread is done
+		and the mutex is unlocked
+
+man pthread_mutex_lock
+	lock
+	trylock
+	unlock
+
+how to control access to memory is by scheduling
+as user, not allowed to change how OS runs. But we can use mutex to
+lock a portion of our code
+
+want to lock BOTH read and writes
+	if you read a data, and want to react to it, dont want another thread to change it during reaction
+	locking writing is obvious
+
+be careful! you could make it so that your threads lock each other
+more problems later!
+
+mutex: turn off parallelism
+want to keep mutexed code segment as small as possible
+
+different variables should have their own mutex!
+	mutex'es can have names
+	pthread_mutex_lock(nameOfVar_A);
+
+uhh dont use trylock for now
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

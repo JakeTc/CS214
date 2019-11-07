@@ -1,0 +1,68 @@
+What did we do last time?
+
+Signals
+	- software interrupt
+	- just because a signal is raised, doesnt mean that there is a problem
+	- means something important happened, and need to react NOW
+	- similar to Java Exception, except when sighandler doesnt abort/terminate/exit,
+	it returns to the line of code that caused the signal, and runs it again.
+
+kill -n <signal> <PID>
+	-use kill to send a signal to a process
+	-to get signal definitions, man signal.h
+	-by default, sends SIGKILL to specified PID
+
+Finding processes
+	-ps aux | grep <username>
+	snapshot: doesnt update itself every second
+	
+	-top
+	updates itself every second
+	but you see ALL processes, not just your own
+	to quit, press 'q'
+
+Threads
+	Threads are another "thread of control" in the same context of execution
+	another set of instructions in a different order acting within the same address space
+	to "wait()" for a thread, use "join()"
+
+POSIX thread library, "pthread library"
+something about kernels?
+man pthread.h <---this is what to include when you want threads
+	pthread_create(...); //similar to fork(), but for threads
+	pthread_exit(...); //similar to exit(), but for threads
+	pthread_join(...); //similar to wait(), but for threads
+
+pthread_create (...)
+4 arguments
+	thread name
+	attributes of the thread
+	void* (*start routine)?
+	parameters?
+	
+pthread_attr_init
+	makes a default attribute struct.
+
+pthread_attr_destroy
+	deletes a attribute struct
+
+
+to add the thread ARCHIVE,
+gcc -lpthread -lm <filename.c>
+ret
+general
+gcc -l<archive> -lm <filename.c>
+
+pthread_exit
+
+pthread_join(thread, **retVal);
+
+int *retvalloc = (int*)malloc(sizeof(int));
+
+to get exitvalue, cast exitvalue to be 
+
+
+
+
+printf
+int pid = fork();

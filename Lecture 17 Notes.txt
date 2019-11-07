@@ -1,0 +1,117 @@
+Asst2:
+have multi-X code do searching only
+have the array be made outside it
+
+
+--
+Processes
+	fork()- create new process
+	wait()- block until process is done and get back exit status
+	exit() send exit status from the child to parent
+	make exit status -1 if search fails
+	wexitedstatus -- get exit status of child
+	#define DIDNOTFIND -1
+	
+new Thread:
+	pthread_create(4 args) - creates new thread
+		pthread handle
+		pthread attributes struct
+		function (void* fn()(void*))
+		function arguments (under a struct whose pointer u pass through as void*)
+			put this on the heap!!!
+	pthread_join(); <---equivalent to wait
+	pthread_exit();
+
+synchonization (unnecessary for asst2, threads/processes only read memory)
+	mutex library/archive- mutual exclusion mechanism
+	want read/write consistency, dont want multiple threads reading/writing the same value
+	
+	pthread_mutex_lock(somemutex);
+	...
+	pthread_mutex_unlock(somemutex);
+	
+	want to keep size of mutexed code as small as possible
+	critical section- segment of code dealing with shared data
+		-keep critical section of code small
+	
+	use multiple mutexes if necessary to guard multiple variables
+		-hidden danger
+
+Thread0			Thread1
+lock(mutex_A)		lock(mutex_B)
+lock(mutex_B)		lock(mutex_A)
+...			...
+unlock(mutex_A)		unlock(mutex_B)
+unlock(mutex_B)		unlock(mutex_A)
+
+This will cause deadlock!!!
+
+to avoid deadlock:
+	- establishing a total ordering on your mutexes
+		i.e. lock in alphabetical order
+		thread0			thread1
+		lock(mutex_A)		lock(mutex_A)
+		lock(mutex_B)		lock(mutex_B)
+	- once you lock, dont lock another mutex until you unlock that mutex
+	- when you unlock one thing, unlock everything, and unlock it in reverse order.
+		vvvThis thread will viol
+		thread0			thread1
+		lock(mutex_A)		lock(mutex_A)
+		lock(mutex_B)		lock(mutex_B)
+		...			...
+		unlock(mutex_A)
+		lock(mutex_A)
+
+
+back to pointers!
+have pointers to:
+	-functions
+	-stack variables
+	-heap
+	-pointers
+	-structs, typedefs, unions, enums
+	-strings (arrays)
+	-nothing
+	
+pointers to arrays and functions are similar (in concept)
+	-arrays
+		>store address of first element
+		>same sized elements
+	-functions
+		>store address of first instruction
+		>same size (size of a machine instruction is consistent)
+
+strings?
+	-array of characters w/ null terminator
+	-so they are arrays that have an unknown size
+	
+IO
+	-reference things of unknown size, part by part, with an indicator of when you're done
+	-parameter of char** --> array of unknown length of unknown size
+	-to get a file, you get a path to the directory of the file and the filename
+	
+kinda like:
+	<handle> ptr = ...malloc(<specification>);
+	<handle> fd = ...open(<specification>);
+	
+IO universe:
+	-open(<pathname>, <filename>, <flags>, |mode|); //mode is optional. Mode is used to create files
+		-returns file descriptor if succeeds, -1 if fails (in which case errno is set appropriately)
+	-close(<fileDescriptor>)
+	-read
+	-write
+	
+	^^^no fopen, fclose, fread, fwrite
+	These are all file streams!
+
+perror <errorCode> <--this can be used to find out what an error code means (given by errno)
+can also be used in code
+	-strerror(errno); <--gets the string that corresponds to the error code
+	-Error codes also have defines in errno header (possibly stdlib)
+		>EACCESS == 2
+	
+
+	
+	
+	
+
