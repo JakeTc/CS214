@@ -1,0 +1,116 @@
+What we talked about last time?
+Mutexes
+	apply MUTual EXclusions to a section of code
+File Descriptors
+	open(<path/name>, <flags>);
+		O_RDONLY
+		O_WRONLY
+		O-RDWR
+	close(fd);
+		hopefully doesnt come back with an error O_O would be bad
+	read/write(fd, addr, numBytes)
+		for both read and write:
+			ret < //read/write ERROR
+			ret == 0 //read: end of file reached
+				//write: nothing was written (NO ERROR)
+			ret > 0 //read/write that many bytes
+		CAVEAT: will sometimes not read/write all numBytes
+			need a loop that checks to make sure that the amount of bytes that you want to
+			read/write are done
+	
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//THIS ISNT FINISHED!!!
+char * rdChunk(File *fd, int totalBytes) {
+	char * buffer = (char*)malloc(totalBytes + 1);
+	//fill buffer with '\0'
+	int bytesRead = 0;
+	
+	do {
+		int status = read(fd, buffer + bytesRead, totalBytes - bytesRead);
+		if(status < 0) {
+			//oh noes!
+		
+		} else if(status == 0) {
+			//EOF?
+		
+		} else {
+			bytesRead+= status
+		
+		}
+	} while(bytesRead < totalBytes); //IDK IF SEMICOLON IS NEEDED O_O BLEEEEH
+	
+	return buffer;
+}
+
+
+stateful: since every time the function is called, the way the function works is based on things other
+	than the arguments.
+	
+	in the case of read/write, it will change where the read/write starts by the amount
+		that has already been read or written
+	fd will maintain the position within the file
+read(fd, buffer, 10); <--first call reads some bytes from the beginning
+read(fd, buffer, 10); <--second call picks up from where the first call left off
+	
+stateless: result depends only on parameters
+tan(23.56);
+tan(23.56); <--will always return the same value if it has the same parameters
+
+on open, get a fd and a fh
+	file handle: 'software cursor' to maintain position in file
+		each IO command increments it
+
+//MESEEEKS
+lseek(fd, offset, whence?)
+	whence arguments
+		SEEK_SET- set position at offset
+		SEEK_CUR- set position at current position and offsets from that
+		SEEK_END- set position at end of file
+			if SEEK_END and write past the end, will extend the file to that length
+				and fills the gap with '\0's
+			can use SEEK_END + lseek to find how big a file is
+
+creating a file
+creat(const char *pathname, int flags, mode_t mode);
+or
+open(const char *pathname, int flags, mode_t mode);
+
+mode values =/= flags!
+	O_CREAT //if file doesnt exist, will be created
+		//need to set permissions! creat will make the owner
+		//do a bitwise OR with ___ and the desired permissions
+			//or do "00_ _ _", with the 3 blanks representing 
+				the permission numbers for o, g, and u
+	O_APPEND
+	O_........
+
+
+//making an empty file to be 1k long
+creat("brandnewfile.c", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+lseek(fd, 1024, SEEK_END);
+
+char end = '\0';
+write(fd, &end, 1);
+
+close(fd);
+
+cat -h?
+od -d
+
+touch brandnewfile
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	
+	
+		
