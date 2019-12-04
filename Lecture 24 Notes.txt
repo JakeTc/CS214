@@ -1,0 +1,28 @@
+Networking
+	CIDR: Classless InterDomain Routing
+	127.0.0.1/32
+	localhost
+
+	routing
+		-is it me? (Layer 7)
+		-is it a machine i am directly connected to? (Layer 6)
+		-which dir conn machine is closest to it? (Layer 5)
+			-"closest" is based on closest match w/ ip
+	
+	ISO OSI - 7 layer stack
+	application	interface with user
+	presentation	taking data and "polish" it (i.e. decompress, decrypt, formatting, etc.)
+	session		synchronization over multiple sockets/ enforce rules over multiple messages
+	transport	Messaging and Quality of Service/ efficiency/ differential delivery. (i.e. sockets/ports/data channel)
+	networking	routing(indirect connection)
+	data link	get fr/ point A to point B/ direct connection (bandwidth)
+	physical	bits to radiation and vice versa
+	
+	Whenever data goes through the layers, extra data is added/subtracted from it in the form of headers or footers
+	
+	anonymity?
+	some other stuff
+	
+	
+	
+	

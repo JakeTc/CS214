@@ -1,0 +1,60 @@
+Sockets:
+	File Descriptor for communicating with another machine (send data to the machine).
+	Can use sockets to talk to another process in the same machine
+
+getting a FD to a file
+	open(<filename>, <flags>);
+
+gethostbyname() technically obsolete, but francisco still uses it since he doesnt like the
+	alternatives
+
+getting a FD in general
+	constructionFunction(<resourceName>, <options>...);
+
+socket types
+	client:
+		can connect
+		can read/write bytes
+
+	server:
+		cannot connect
+		cannot read/write bytes
+		
+		can only receive connections requests (from client sockets)
+			but it returns a client-type socket that allows the server to
+			communicate back with the client side
+		
+C = client socket; O = server socket; ^ = arrow up
+	 client			server
+	|   C	| ------------>	|   S  	|
+	|   ^ 	| <------------	|   C   |
+
+accept is a blocking call. Thus, if accepting, cant use other sockets within the same thread of control
+instead, use multiple processes/threads to manage multiple sockets
+	one thread per socket
+
+Steps to build the different types of sockets:
+client
+	socket()
+	connect()
+	start reading/writing to that socket
+	
+server
+	socket()
+	bind() <-- binds the socket to a specific port
+	listen() <---set up machine to "listen" for connections
+	accept() <---"listens" for connections
+
+ip addres: points to a machine
+port number: points to a process on a machine
+default ports for:
+	http: 80
+	ssh: 22
+	dns: 52
+	scp: 23
+	
+
+	
+
+
+

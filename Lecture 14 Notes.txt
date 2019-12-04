@@ -61,7 +61,7 @@ atexit
 		
 		int main...
 		
-			atexit(notifyexit);
+			atexit(notifyExit);
 	- if you kill a process manually, the process doesnt send the exit signal
 	- if you get a signal that aborts, does not send the exit signal
 

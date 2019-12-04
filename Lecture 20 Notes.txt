@@ -1,0 +1,34 @@
+
+
+IO
+	open - get a fd
+	close - get rid of a fd
+	read - get bytes from a fd
+	write - give bytes to a fd
+	
+	open(<name>, <flags>); <--if you plan to read/wr from an existing file
+	
+	//if you plan to create a file
+	open(<name>, <flags>, <mode>);
+	flags: at the minimum, will say how you plan to interact with the file
+		O_RDWR | O_CREAT <---bitwise or to combine flags together
+	mode: permissions on the new file. <--only for if you are creating a new file
+	
+create
+
+lseek
+
+atoi --> char array to integer
+
+directory chains: relative vs absolute
+	relative: ./<pathfromheretodesiredfile>
+	absolute: starts at root (or /) and continues from there
+	
+fd- identify some IO resource/endpoint
+	fh (file handle)- cursor/position in the resource(not always present, but
+		definitely there for files)
+
+lseek: how to update the fh
+	-can make the file bigger, lseek to end + some more, and write something there
+	-if you lseek to the end of a file, lseek will return how long the file is
+

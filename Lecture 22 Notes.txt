@@ -1,0 +1,47 @@
+Socket
+
+client vs server
+	client: can read/write arbitrary bytes (can send/recieve data with it)
+	server: receive connection requests
+		-accept returns a client-type socket, which you can use to talk to the client
+	
+problem: dont necessarily know what message will be sent, so don't know how many bytes to read()
+	-insist, as part of the protocol, that the first thing sent is the size of the message
+	OR
+	-insist, as part of the protocol, that there is a recognizable footer/flag to end the data (like null terminator)
+	
+routing:
+	need to send to some host indirectly... 
+	...so which of those of you are directly connected to should you send to?
+		-whomever can get you closer
+	IP:255.255.255.255
+	
+	192.168.1.1
+	/---/---/---/.X
+	
+	Class A: first octect only set (routes everything under that)
+	Class B: first two octets only set (routes everything under that)
+	Class C: first three octets only set (routes everything under that)
+	Class D: all four octets set (can only route to yourself)
+	
+	Class based routing works... but the granularity makes trouble
+	
+	how to route anywhere without fill knowledge of all paths?
+		-store and forward (of best effort)
+	
+	
+	routing table
+	|-----IP----|bits|class|
+	192.168.1.45/8 - class A
+	192.168.1.45/16 - class B
+	192.168.1.45/24 - class C
+	192.168.1.45/32 - class D
+	
+	bits = number of bits that the router routes to
+
+IP address == machine i want to talk to
+port # = process to talk to on that machine
+
+but when i wanna connect to google i connect to... www.google.com... which is a name?
+
+DNS (Domain Name Service) translates names into IP addresses.

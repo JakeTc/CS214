@@ -1,0 +1,55 @@
+Last Project of the Year!
+DUMB using DUMB protocol
+
+rand num between 4096 and 65536 == port number! maybe use something random, like 36276
+when getting a connection request, makes a new thread to handle that client
+the thread stays with the client for the entire session until client wants to quit.
+
+client side will converse w/ user
+	user types in commands and client converts this to prtcl
+	client then send this to server
+	server gives response
+	client interprets response and gives it to user
+
+	HELLO
+		when client starts up, immediately connects by sending "HELLO"
+
+INITIALLY SET IT UP WITH FILE DESCRIPTORS AND NOT SOCKETS
+ALLOWS YOU TO TEST IT
+
+INITIALLY READ A COMMAND AND EXECUTE IT W/O PARALLELISM
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+Networking:
+Routing
+	me?
+	directly connected
+	store & forward
+		either send to target, or send to machine closest to client
+		closest determined by if their ip has the best match to target ip
+	Class based: 	A	B	C	D
+			255.	255.	255.	255
+	Classless InterDomain Routing: 
+		192.168.1.1/8
+		192.168.1.1/32
+		192.168.1.1/30
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
